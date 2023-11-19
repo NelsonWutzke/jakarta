@@ -1,7 +1,10 @@
 package com.nwutzke.apiservlet.webapp.bd.controllers;
 
+import com.nwutzke.apiservlet.webapp.bd.models.Usuario;
 import com.nwutzke.apiservlet.webapp.bd.services.LoginServiceSessionImpl;
 import com.nwutzke.apiservlet.webapp.bd.services.LoginService;
+import com.nwutzke.apiservlet.webapp.bd.services.UsuarioService;
+import com.nwutzke.apiservlet.webapp.bd.services.UsuarioServiceImpl;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -10,13 +13,12 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
 import java.util.Optional;
 
 @WebServlet({"/login","/login.html"})
 public class LoginServlet extends HttpServlet {
 
-    final static String USERNAME = "admin";
-    final static String PASSWORD = "12345";
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -51,7 +53,9 @@ public class LoginServlet extends HttpServlet {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
 
-        if (USERNAME.equals(username)&&PASSWORD.equals(password)){
+        UsuarioService service = new UsuarioServiceImpl((Connection) req.getAttribute("conn"));
+        Optional<Usuario> usuarioOptional = service.login(username,password);
+        if (usuarioOptional.isPresent()){
 
             req.getSession().setAttribute("username", username);
 
