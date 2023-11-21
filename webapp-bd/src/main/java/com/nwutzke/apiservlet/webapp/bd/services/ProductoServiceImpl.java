@@ -2,10 +2,12 @@ package com.nwutzke.apiservlet.webapp.bd.services;
 
 import com.nwutzke.apiservlet.webapp.bd.models.Categoria;
 import com.nwutzke.apiservlet.webapp.bd.models.Producto;
+import jakarta.enterprise.inject.Alternative;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+//@Alternative
 
 public class ProductoServiceImpl implements ProductoService{
     @Override

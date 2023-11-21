@@ -1,25 +1,26 @@
 package com.nwutzke.apiservlet.webapp.bd.services;
 
+import com.nwutzke.apiservlet.webapp.bd.configs.ProductoServicePrincipal;
+import com.nwutzke.apiservlet.webapp.bd.configs.Service;
+import com.nwutzke.apiservlet.webapp.bd.interceptors.Logging;
 import com.nwutzke.apiservlet.webapp.bd.models.Categoria;
 import com.nwutzke.apiservlet.webapp.bd.models.Producto;
-import com.nwutzke.apiservlet.webapp.bd.repositories.CategoriaRepositoryImpl;
-import com.nwutzke.apiservlet.webapp.bd.repositories.ProductoRepositoryJdbcImpl;
-import com.nwutzke.apiservlet.webapp.bd.repositories.Repository;
+import com.nwutzke.apiservlet.webapp.bd.repositories.CrudRepository;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
-
+@Service
+@ProductoServicePrincipal
 public class ProductoServiceJdbcImpl implements ProductoService{
 
-    private Repository<Producto> repositoryJdbc;
-    private Repository<Categoria> repositoryCategoriaJdbc;
+    @Inject
+    private CrudRepository<Producto> repositoryJdbc;
+    @Inject
+    private CrudRepository<Categoria> repositoryCategoriaJdbc;
 
-    public ProductoServiceJdbcImpl(Connection connection) {
-        this.repositoryJdbc = new ProductoRepositoryJdbcImpl(connection);
-        this.repositoryCategoriaJdbc = new CategoriaRepositoryImpl(connection);
-    }
 
     @Override
     public List<Producto> listar() {

@@ -1,16 +1,20 @@
 package com.nwutzke.apiservlet.webapp.bd.repositories;
 
+import com.nwutzke.apiservlet.webapp.bd.configs.MysqlConn;
+import com.nwutzke.apiservlet.webapp.bd.configs.Repository;
 import com.nwutzke.apiservlet.webapp.bd.models.Categoria;
+import jakarta.inject.Inject;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
-public class CategoriaRepositoryImpl implements Repository<Categoria>{
+//@ApplicationScoped
+@Repository
+public class CategoriaRepositoryImpl implements CrudRepository<Categoria> {
 
     Connection conn;
-
-    public CategoriaRepositoryImpl(Connection conn) {
+    @Inject
+    public CategoriaRepositoryImpl(/*@Named("conn")*/@MysqlConn Connection conn) {
         this.conn = conn;
     }
 

@@ -1,16 +1,34 @@
 package com.nwutzke.apiservlet.webapp.bd.models;
 
+import com.nwutzke.apiservlet.webapp.bd.configs.CarroCompra;
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
+import jakarta.enterprise.context.SessionScoped;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Logger;
 
-public class Carro {
+@CarroCompra
+public class Carro implements Serializable {
     private List<ItemCarro> items;
+    @Inject
+    private transient Logger log;
 
-    public Carro() {
+    @PostConstruct
+    public void inicializar(){
         this.items = new ArrayList<>();
+        log.info("inicializando el carro de compras");
     }
 
+    @PreDestroy
+    public void destruir(){
+        log.info("destruyendo el carro de compras");
+    }
     public void addItemCarro(ItemCarro itemCarro){
         if (items.contains(itemCarro)){
             Optional<ItemCarro> optionalItemCarro = items.stream()

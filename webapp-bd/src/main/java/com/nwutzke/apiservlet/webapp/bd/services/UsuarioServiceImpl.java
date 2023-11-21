@@ -1,19 +1,23 @@
 package com.nwutzke.apiservlet.webapp.bd.services;
 
+import com.nwutzke.apiservlet.webapp.bd.configs.Service;
 import com.nwutzke.apiservlet.webapp.bd.models.Usuario;
 import com.nwutzke.apiservlet.webapp.bd.repositories.UsuarioRepository;
 import com.nwutzke.apiservlet.webapp.bd.repositories.UsuarioRepositoryImpl;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Optional;
-
+//@ApplicationScoped
+@Service
 public class UsuarioServiceImpl implements UsuarioService{
 
     private UsuarioRepository usuarioRepository;
-
-    public UsuarioServiceImpl(Connection connection) {
-        this.usuarioRepository = new UsuarioRepositoryImpl(connection);
+    @Inject
+    public UsuarioServiceImpl(UsuarioRepository usuarioRepository) {
+        this.usuarioRepository = usuarioRepository;
     }
 
     @Override

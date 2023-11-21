@@ -1,20 +1,37 @@
 package com.nwutzke.apiservlet.webapp.bd.repositories;
 
+import com.nwutzke.apiservlet.webapp.bd.configs.MysqlConn;
+
+
+import com.nwutzke.apiservlet.webapp.bd.configs.Repository;
 import com.nwutzke.apiservlet.webapp.bd.models.Categoria;
 import com.nwutzke.apiservlet.webapp.bd.models.Producto;
-
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
+import jakarta.inject.Inject;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.logging.Logger;
 
-public class ProductoRepositoryJdbcImpl implements Repository<Producto>{
+//@ApplicationScoped
+@Repository
+public class ProductoRepositoryJdbcImpl implements CrudRepository<Producto> {
+    @Inject
+    //@Named("conn")
+    @MysqlConn
     private Connection conn;
+    @Inject
+    private Logger log;
+    @PostConstruct
+    public void inicializar(){
+        log.info("inicializando el beans " + this.getClass().getName());
+    }
 
-    public ProductoRepositoryJdbcImpl(Connection conn) {
-        this.conn = conn;
+    @PreDestroy
+    public void destruir(){
+        log.info("destruyendo el bean " + this.getClass().getName());
     }
 
     @Override

@@ -1,10 +1,11 @@
 package com.nwutzke.apiservlet.webapp.bd.services;
 
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 import java.util.Optional;
-
+@ApplicationScoped
 public class LoginServiceSessionImpl implements LoginService{
     @Override
     public Optional<String> getUsername(HttpServletRequest request) {

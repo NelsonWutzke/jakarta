@@ -1,20 +1,22 @@
 package com.nwutzke.apiservlet.webapp.bd.repositories;
 
+import com.nwutzke.apiservlet.webapp.bd.configs.MysqlConn;
+import com.nwutzke.apiservlet.webapp.bd.configs.Repository;
 import com.nwutzke.apiservlet.webapp.bd.models.Usuario;
+import jakarta.inject.Inject;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
-
+//@ApplicationScoped
+@Repository
 public class UsuarioRepositoryImpl implements UsuarioRepository {
-
+    @Inject
+    //@Named("conn")
+    @MysqlConn
     private Connection conn;
-
-    public UsuarioRepositoryImpl(Connection conn) {
-        this.conn = conn;
-    }
 
     @Override
     public List<Usuario> listar() throws SQLException {
