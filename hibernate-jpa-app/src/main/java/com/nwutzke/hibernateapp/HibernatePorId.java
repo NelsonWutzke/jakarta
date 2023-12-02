@@ -3,7 +3,6 @@ package com.nwutzke.hibernateapp;
 import com.nwutzke.hibernateapp.entity.Cliente;
 import com.nwutzke.hibernateapp.util.JpaUtil;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.Query;
 
 import java.util.Scanner;
 
@@ -21,6 +20,11 @@ public class HibernatePorId {
         //si o si debe devolver un solo registro de lo contrario lanza excepcion
         //Cliente c = (Cliente) query.getSingleResult();
         System.out.println(cliente);
+        //find funciona como un cache de primer nivel, solo hay una consulta sql
+        Cliente cliente2 = em.find(Cliente.class, id);
+        System.out.println(cliente2);
+
+
 
         em.close();
     }
