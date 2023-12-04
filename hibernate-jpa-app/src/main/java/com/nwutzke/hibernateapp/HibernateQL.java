@@ -5,6 +5,7 @@ import com.nwutzke.hibernateapp.entity.Cliente;
 import com.nwutzke.hibernateapp.util.JpaUtil;
 import jakarta.persistence.EntityManager;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class HibernateQL {
@@ -177,6 +178,28 @@ public class HibernateQL {
         System.out.println("Min= "+min + " Max="+max + " Sum=" + sum + " Count=" + count + " Avg="+avg);
 
 
+        System.out.println("========= Consultas con el nombre mas corto y su largo ==========");
+        registros = em.createQuery("select c.nombre, length(c.nombre) from Cliente c where " +
+                        "length(c.nombre) = (select min(length(c.nombre)) from Cliente c)", Object[].class)
+                .getResultList();
+        registros.forEach(reg -> {
+            String nom = (String) reg[0];
+            Integer largo = (Integer) reg[1];
+            System.out.println("nombre=" + nom + ", largo=" + largo);
+        });
+
+
+        System.out.println("========= Consultas para obtener el ultimo registro ==========");
+        Cliente ultimoCliente = em.createQuery("select c from Cliente c where c.id = (select max(c.id) from Cliente c)",Cliente.class).getSingleResult();
+        System.out.println(ultimoCliente);
+
+
+        System.out.println("========= Consultas where in ==========");
+        //clientes = em.createQuery("select c from Cliente c where c.id in (1,2,7)", Cliente.class).getResultList();
+        clientes = em.createQuery("select c from Cliente c where c.id in :ids", Cliente.class)
+                .setParameter("ids", Arrays.asList(1L,2L,4L,40L))
+                .getResultList();
+        clientes.forEach(System.out::println);
 
         em.close();
 
