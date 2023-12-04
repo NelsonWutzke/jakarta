@@ -2,6 +2,8 @@ package com.nwutzke.hibernateapp.entity;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "clientes")
 public class Cliente<C> {
@@ -12,6 +14,10 @@ public class Cliente<C> {
     private String apellido;
     @Column(name = "forma_pago")
     private String formaPago;
+    @Column(name = "creado_en")
+    private LocalDateTime creadoEn;
+    @Column(name = "editado_en")
+    private LocalDateTime editadoEn;
 
     public Cliente() {
     }
@@ -26,6 +32,17 @@ public class Cliente<C> {
         this.nombre = nombre;
         this.apellido = apellido;
         this.formaPago = formaPago;
+    }
+    @PrePersist
+    public void prePersist(){
+        System.out.println("inicializar algo justo antes del persist");
+        this.creadoEn = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    public void preUpdate(){
+        System.out.println("inicializar algo justo antes del update/merge");
+        this.editadoEn = LocalDateTime.now();
     }
 
     public Long getId() {
@@ -60,12 +77,30 @@ public class Cliente<C> {
         this.formaPago = formaPago;
     }
 
+    public LocalDateTime getCreadoEn() {
+        return creadoEn;
+    }
+
+    public void setCreadoEn(LocalDateTime creadoEn) {
+        this.creadoEn = creadoEn;
+    }
+
+    public LocalDateTime getEditadoEn() {
+        return editadoEn;
+    }
+
+    public void setEditadoEn(LocalDateTime editadoEn) {
+        this.editadoEn = editadoEn;
+    }
+
     @Override
     public String toString() {
         return  "id=" + id +
                 ", nombre='" + nombre + '\'' +
                 ", apellido='" + apellido + '\'' +
-                ", formaPago='" + formaPago;
+                ", formaPago='" + formaPago + '\'' +
+                ", creadoEn='" + creadoEn + '\'' +
+                ", editadoEn='" + editadoEn;
 
     }
 }
