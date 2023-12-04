@@ -96,7 +96,30 @@ public class HibernateQL {
         System.out.println(totalFormasPago);
 
 
+        System.out.println("========= Consulta con nombre y apellido concatenados  ==========");
+        //opcion 1
+        /* nombres = em.createQuery("select concat(c.nombre, ' ', c.apellido) as nombreCompleto from Cliente c",String.class)
+                        .getResultList();
+        nombres.forEach(System.out::println);*/
+        //opcion 2
+        nombres = em.createQuery("select concat(c.nombre || ' ' || c.apellido) as nombreCompleto from Cliente c",String.class)
+                .getResultList();
+        nombres.forEach(System.out::println);
 
+
+        System.out.println("========= Consulta con nombre y apellido concatenados en MAYUSCULA ==========");
+
+        nombres = em.createQuery("select upper(concat(c.nombre, ' ', c.apellido)) as nombreCompleto from Cliente c",String.class)
+                        .getResultList();
+        nombres.forEach(System.out::println);
+
+        System.out.println("========= Consulta para buscar por nombre ==========");
+        String param = "e";
+        clientes = em.createQuery("select c from Cliente c where upper(c.nombre) like upper(:parametro)",Cliente.class)
+                .setParameter("parametro","%"+param+"%")
+                .getResultList();
+
+        clientes.forEach(System.out::println);
         em.close();
 
     }
