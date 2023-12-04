@@ -120,6 +120,22 @@ public class HibernateQL {
                 .getResultList();
 
         clientes.forEach(System.out::println);
+
+
+        System.out.println("========= Consultas por rangos ==========");
+        //clientes = em.createQuery("select c from Cliente c where c.id between 2 and 5",Cliente.class).getResultList();
+        // cuando es between sobre string el segundo parametro no se incluye, en este caso la P
+        clientes = em.createQuery("select c from Cliente c where c.nombre between 'J' and 'P' ",Cliente.class).getResultList();
+        clientes.forEach(System.out::println);
+
+
+        System.out.println("========= Consultas con orden ==========");
+        clientes = em.createQuery("select c from Cliente c order by c.nombre asc, c.apellido desc", Cliente.class).getResultList();
+        clientes.forEach(System.out::println);
+
+
+
+
         em.close();
 
     }
