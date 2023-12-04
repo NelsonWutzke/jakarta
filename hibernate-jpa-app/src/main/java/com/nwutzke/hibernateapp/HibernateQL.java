@@ -1,11 +1,11 @@
 package com.nwutzke.hibernateapp;
 
+import com.nwutzke.hibernateapp.dominio.ClienteDto;
 import com.nwutzke.hibernateapp.entity.Cliente;
 import com.nwutzke.hibernateapp.util.JpaUtil;
 import jakarta.persistence.EntityManager;
 
 import java.util.List;
-import java.util.Objects;
 
 public class HibernateQL {
     public static void main(String[] args) {
@@ -54,6 +54,27 @@ public class HibernateQL {
             String apellidoCli = (String) reg[2];
             System.out.println("id= "+idCli+" nombre= "+nombreCli+" apellido= "+apellidoCli);
         });
+
+        System.out.println("========= Consulta por cliente y forma de pago  ==========");
+        registros = em.createQuery("select c, c.formaPago from Cliente c", Object[].class)
+                        .getResultList();
+
+        registros.forEach(reg->{
+            Cliente c= (Cliente) reg[0];
+            String formaPago= (String) reg[1];
+            System.out.println("formaPago= "+formaPago + " , " + c);
+        });
+
+
+        System.out.println("========= Consulta que puebla y devuelve objeto entity de una clase personalizada  ==========");
+        clientes = em.createQuery("select new Cliente(c.nombre,c.apellido) from Cliente c",Cliente.class).getResultList();
+        clientes.forEach(System.out::println);
+
+        System.out.println("========= Consulta que puebla y devuelve objeto otro(dto) de una clase personalizada  ==========");
+        List<ClienteDto> clientesdto = em.createQuery("select new com.nwutzke.hibernateapp.dominio.ClienteDto(c.nombre,c.apellido) from Cliente c", ClienteDto.class).getResultList();
+        clientesdto.forEach(System.out::println);
+
+
 
         em.close();
 
