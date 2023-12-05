@@ -19,7 +19,11 @@ public class Cliente<C> {
     @Embedded
     private Auditoria auditoria = new Auditoria();
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "id_cliente")
+    //@JoinColumn(name = "id_cliente")
+    @JoinTable(name = "tbl_clientes_direcciones",
+            joinColumns = @JoinColumn(name = "id_cliente"),
+            inverseJoinColumns = @JoinColumn(name = "id_direccion"),
+            uniqueConstraints = @UniqueConstraint(columnNames = {"id_direccion"}))
     private List<Direccion> direcciones;
 
     public Cliente() {
@@ -86,7 +90,7 @@ public class Cliente<C> {
         LocalDateTime creado = this.auditoria != null ? auditoria.getCreadoEn() : null;
         LocalDateTime editado = this.auditoria != null ? auditoria.getEditadoEn() : null;
 
-        return  "{" +
+        return "{" +
                 "id=" + id +
                 ", nombre='" + nombre + '\'' +
                 ", apellido='" + apellido + '\'' +

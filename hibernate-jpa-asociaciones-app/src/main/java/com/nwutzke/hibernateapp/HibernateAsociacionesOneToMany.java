@@ -24,12 +24,8 @@ public class HibernateAsociacionesOneToMany {
             cliente.getDirecciones().add(d2);
             cliente.getDirecciones().add(d3);
             em.persist(cliente);
-
-
-
-
-
             em.getTransaction().commit();
+            System.out.println(cliente);
 
         }catch (Exception e){
             em.getTransaction().rollback();
