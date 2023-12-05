@@ -24,12 +24,14 @@ public class HibernateAsociacionesOneToManyFind {
             cliente.getDirecciones().add(d2);
             cliente.getDirecciones().add(d3);
             em.merge(cliente);
-
-
-
-
-
             em.getTransaction().commit();
+            System.out.println(cliente);
+
+            em.getTransaction().begin();
+            d1 = em.find(Direccion.class,1L);
+            cliente.getDirecciones().remove(d1);
+            em.getTransaction().commit();
+            System.out.println(cliente);
 
         }catch (Exception e){
             em.getTransaction().rollback();
