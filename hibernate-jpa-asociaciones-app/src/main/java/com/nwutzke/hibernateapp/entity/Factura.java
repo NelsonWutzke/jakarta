@@ -57,11 +57,10 @@ public class Factura {
 
     @Override
     public String toString() {
-        return "Factura{" +
+        return "{" +
                 "id=" + id +
                 ", descripcion='" + descripcion + '\'' +
                 ", total=" + total +
-                ", cliente=" + cliente +
                 '}';
     }
 }
