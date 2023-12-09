@@ -29,6 +29,10 @@ public class Cliente<C> {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "cliente")
     private List<Factura> facturas;
 
+    @OneToOne
+    @JoinColumn(name = "cliente_detalle_id")
+    private ClienteDetalle detalle;
+
     public Cliente() {
         facturas = new ArrayList<>();
         direcciones = new ArrayList<>();
@@ -105,6 +109,14 @@ public class Cliente<C> {
         this.facturas = facturas;
     }
 
+    public ClienteDetalle getDetalle() {
+        return detalle;
+    }
+
+    public void setDetalle(ClienteDetalle detalle) {
+        this.detalle = detalle;
+    }
+
     public Cliente addFactura(Factura factura) {
         this.facturas.add(factura);
         factura.setCliente(this);
@@ -130,6 +142,7 @@ public class Cliente<C> {
                 ", editadoEn='" + editado +
                 ", direcciones= '" + direcciones + '\'' +
                 ", facturas= '" + facturas + '\'' +
+                ", detalle= '" + detalle + '\'' +
                 '}';
 
     }

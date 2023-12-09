@@ -5,6 +5,7 @@
         <class>com.nwutzke.hibernateapp.entity.Cliente</class>
         <class>com.nwutzke.hibernateapp.entity.Factura</class>
         <class>com.nwutzke.hibernateapp.entity.Direccion</class>
+        <class>com.nwutzke.hibernateapp.entity.ClienteDetalle</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>
             <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/java_hibernate_curso?serverTimezone=America/Argentina/Buenos_Aires"/>
