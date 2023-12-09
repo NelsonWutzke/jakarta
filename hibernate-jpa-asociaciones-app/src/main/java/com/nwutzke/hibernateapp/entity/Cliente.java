@@ -111,6 +111,11 @@ public class Cliente<C> {
         return this;
     }
 
+    public void removeFactura(Factura factura) {
+        this.facturas.remove(factura);
+        factura.setCliente(null);
+    }
+
     @Override
     public String toString() {
         LocalDateTime creado = this.auditoria != null ? auditoria.getCreadoEn() : null;

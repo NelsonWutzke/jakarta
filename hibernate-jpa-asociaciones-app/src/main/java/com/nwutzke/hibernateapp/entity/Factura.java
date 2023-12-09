@@ -2,6 +2,8 @@ package com.nwutzke.hibernateapp.entity;
 
 import jakarta.persistence.*;
 
+import java.util.Objects;
+
 @Entity
 @Table(name = "facturas")
 public class Factura {
@@ -63,4 +65,13 @@ public class Factura {
                 ", total=" + total +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Factura factura = (Factura) o;
+        return Objects.equals(id, factura.id) && Objects.equals(descripcion, factura.descripcion) && Objects.equals(total, factura.total);
+    }
+
 }
