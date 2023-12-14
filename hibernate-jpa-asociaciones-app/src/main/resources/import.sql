@@ -8,3 +8,5 @@ INSERT INTO direcciones(calle, numero) VALUES ('colon',456);
 INSERT INTO tbl_clientes_direcciones (id_cliente, id_direccion) VALUES (1,1);
 INSERT INTO tbl_clientes_direcciones (id_cliente, id_direccion) VALUES (1,2);
 INSERT INTO clientes_detalles (prime,puntos_acumulados, cliente_detalle_id) VALUES (1,8000,1);
+INSERT INTO tbl_alumnos_cursos (alumno_id, curso_id) VALUES (1,1);
+INSERT INTO tbl_alumnos_cursos (alumno_id, curso_id) VALUES (1,2);
