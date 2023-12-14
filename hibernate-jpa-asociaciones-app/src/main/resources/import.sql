@@ -10,3 +10,7 @@ INSERT INTO tbl_clientes_direcciones (id_cliente, id_direccion) VALUES (1,2);
 INSERT INTO clientes_detalles (prime,puntos_acumulados, cliente_detalle_id) VALUES (1,8000,1);
 INSERT INTO tbl_alumnos_cursos (alumno_id, curso_id) VALUES (1,1);
 INSERT INTO tbl_alumnos_cursos (alumno_id, curso_id) VALUES (1,2);
+INSERT INTO facturas (descripcion, total, id_cliente) VALUES ('oficina',4000,1);
+INSERT INTO facturas (descripcion, total, id_cliente) VALUES ('casa',2000,1);
+INSERT INTO facturas (descripcion, total, id_cliente) VALUES ('deporte',3000,1);
+INSERT INTO facturas (descripcion, total, id_cliente) VALUES ('computacion',7000,2);
