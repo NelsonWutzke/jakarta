@@ -3,3 +3,7 @@ INSERT INTO alumnos (id, nombre, apellido) VALUES(1,'Johana','Doe')
 INSERT INTO alumnos (id, nombre, apellido) VALUES(2,'Pepe','Gon')
 INSERT INTO cursos (id, titulo, profesor) VALUES(1,'Curso SQL','Juan')
 INSERT INTO cursos (id, titulo, profesor) VALUES(2,'Curso NodeJS','Juan')
+INSERT INTO direcciones(calle, numero) VALUES ('vaticano',123);
+INSERT INTO direcciones(calle, numero) VALUES ('colon',456);
+INSERT INTO tbl_clientes_direcciones (id_cliente, id_direccion) VALUES (1,1);
+INSERT INTO tbl_clientes_direcciones (id_cliente, id_direccion) VALUES (1,2);

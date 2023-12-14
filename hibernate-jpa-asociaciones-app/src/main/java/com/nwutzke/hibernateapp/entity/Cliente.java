@@ -18,7 +18,8 @@ public class Cliente<C> {
     private String formaPago;
     @Embedded
     private Auditoria auditoria = new Auditoria();
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    //@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true) //POR DEFECTO ES LAZY
     //@JoinColumn(name = "id_cliente")
     @JoinTable(name = "tbl_clientes_direcciones",
             joinColumns = @JoinColumn(name = "id_cliente"),
