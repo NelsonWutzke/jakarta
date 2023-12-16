@@ -1,0 +1,13 @@
+<beans xmlns="https://jakarta.ee/xml/ns/jakartaee"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/beans_3_0.xsd"
+       version="3.0" bean-discovery-mode="annotated">
+       <!--version="3.0" bean-discovery-mode="all">-->
+
+       <interceptors>
+              <class>com.nwutzke.apiservlet.webapp.bd.interceptors.LoggingInterceptor</class>
+              <class>com.nwutzke.apiservlet.webapp.bd.interceptors.TransactionalInterceptor</class>
+              <class>com.nwutzke.apiservlet.webapp.bd.interceptors.TransactionalJpaInterceptor</class>
+       </interceptors>
+
+</beans>
