@@ -4,8 +4,8 @@ import jakarta.ejb.Stateful; //no es buena practica inyectar Stateful en un Serv
 import jakarta.ejb.Stateless;
 import jakarta.enterprise.context.RequestScoped;
 
-@RequestScoped
-@Stateful
+//@RequestScoped
+@Stateless
 public class ServiceEjb {
 
     private int contador;
