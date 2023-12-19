@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.wutzke.webapp.ejb.service.ServiceEjb;
+import org.wutzke.webapp.ejb.service.ServiceEjbLocal;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -16,20 +17,20 @@ import java.io.IOException;
 @WebServlet("/index")
 public class EjemploServlet extends HttpServlet {
     /*@Inject // si iyectamos con EJB el contexto no se aplica, en su lugar se usa Inject
-    private ServiceEjb service;
+    private ServiceEjbLocal service;
 
     @Inject
-    private ServiceEjb service2;*/
-    ServiceEjb service = null;
-    ServiceEjb service2 = null;
+    private ServiceEjbLocal service2;*/
+    ServiceEjbLocal service = null;
+    ServiceEjbLocal service2 = null;
 
 
 
     {
         try {
             InitialContext ctx = new InitialContext();
-            service = (ServiceEjb) ctx.lookup("java:global/webapp-ejb/ServiceEjb!org.wutzke.webapp.ejb.service.ServiceEjb");
-            service2 = (ServiceEjb) ctx.lookup("java:global/webapp-ejb/ServiceEjb!org.wutzke.webapp.ejb.service.ServiceEjb");
+            service = (ServiceEjbLocal) ctx.lookup("java:global/webapp-ejb/ServiceEjb!org.wutzke.webapp.ejb.service.ServiceEjbLocal");
+            service2 = (ServiceEjbLocal) ctx.lookup("java:global/webapp-ejb/ServiceEjb!org.wutzke.webapp.ejb.service.ServiceEjbLocal");
         } catch (NamingException e) {
             throw new RuntimeException(e);
         }

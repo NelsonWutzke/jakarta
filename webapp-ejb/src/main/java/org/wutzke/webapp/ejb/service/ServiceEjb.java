@@ -1,12 +1,10 @@
 package org.wutzke.webapp.ejb.service;
 
-import jakarta.ejb.Stateful; //no es buena practica inyectar Stateful en un Servlet
 import jakarta.ejb.Stateless;
-import jakarta.enterprise.context.RequestScoped;
 
 //@RequestScoped
 @Stateless
-public class ServiceEjb {
+public class ServiceEjb implements ServiceEjbLocal {
 
     private int contador;
 
