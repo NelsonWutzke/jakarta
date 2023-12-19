@@ -7,6 +7,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.wutzke.webapp.ejb.models.Producto;
 import org.wutzke.webapp.ejb.service.ServiceEjb;
 import org.wutzke.webapp.ejb.service.ServiceEjbLocal;
 
@@ -25,8 +26,8 @@ public class EjemploServlet extends HttpServlet {
     ServiceEjbLocal service2 = null;
 
 
-
-    {
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
             InitialContext ctx = new InitialContext();
             service = (ServiceEjbLocal) ctx.lookup("java:global/webapp-ejb/ServiceEjb!org.wutzke.webapp.ejb.service.ServiceEjbLocal");
@@ -34,13 +35,15 @@ public class EjemploServlet extends HttpServlet {
         } catch (NamingException e) {
             throw new RuntimeException(e);
         }
-    }
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("service si es igual a service2 = " + service.equals(service2));
+
+        Producto p = service.crear(new Producto("uvas"));
+        System.out.println("nuevo producto " + p);
+
         req.setAttribute("saludo",service.saludar("Nelson"));
         req.setAttribute("saludo2",service2.saludar("John"));
+        req.setAttribute("listado",service.listar());
         getServletContext().getRequestDispatcher("/index.jsp").forward(req,resp);
     }
 }
